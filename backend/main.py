@@ -8,7 +8,10 @@ app = FastAPI(title="CV Smart Analyzer API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+    "https://alonsome.tech",
+    "https://www.alonsome.tech"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
