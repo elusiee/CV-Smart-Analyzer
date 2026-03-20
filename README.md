@@ -94,44 +94,36 @@ cd cv-smart-analyzer
 
 ### 2. Setup Backend
 
-```bash
 cd backend
 python -m venv venv
 
 ### 3. Activate virtual environment
 Windows:
 
-```bash
 venv\Scripts\activate
 
 Mac/Linux:
 
-```bash
 source venv/bin/activate
 
 ### 4. Install Dependencies
 
-```bash
 pip install -r requirements.txt
 
 ### 5. Add Environment Variables
 Create .env inside backend/:
-```bash
 OPENROUTER_API_KEY=your_api_key_here
 
 ### 6. Run Backend
 
-```bash
 uvicorn main:app --reload
 
 ### 7. Run Frontend
 
-```bash
 cd ../frontend
 python -m http.server 5500
 
 Open:
-```bash
 http://127.0.0.1:5500
 
 
@@ -142,10 +134,6 @@ http://127.0.0.1:5500
 | `/extract-pdf-text` | POST   | Extract text from PDF         |
 | `/match-job`        | POST   | Match CV with job description |
 
-
-🎥 Demo Video
-
-[Add your demo video link here]
 
 ### 📁 PROJECT STRUCTURE
 
@@ -168,23 +156,16 @@ cv-smart-analyzer/
 ⚠️ Notes
 
 - Ensure your API key is valid before running the app
-
 - Free-tier AI APIs may have rate limits
-
 - The system includes fallback handling for reliability
 
 🚀 Future Improvements
 
 - Authentication system (user accounts)
-
 - CV history tracking
-
 - Export results as PDF
-
 - Enhanced UI/UX design
-
 - Support for more file formats
 
 👨‍💻 Author
-
 ELUSIE C. EMMANUEL (Alonsome)
