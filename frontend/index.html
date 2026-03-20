@@ -10,50 +10,58 @@
   <div class="container">
     <header class="hero">
       <h1>CV Smart Analyzer</h1>
-      <p>Upload your CV or paste its content to get instant AI-powered feedback.</p>
+      <p>
+        Upload your CV or paste its content to get instant AI-powered feedback,
+        then compare it against a job description.
+      </p>
     </header>
 
     <section class="card">
       <h2>Analyze Your CV</h2>
 
       <div class="tabs">
-        <button class="tab-btn active" data-tab="textTab">Paste Text</button>
-        <button class="tab-btn" data-tab="pdfTab">Upload PDF</button>
+        <button class="tab-btn active" data-tab="textTab" type="button">Paste Text</button>
+        <button class="tab-btn" data-tab="pdfTab" type="button">Upload PDF</button>
       </div>
 
       <div id="textTab" class="tab-content active">
         <label for="cvText">Paste CV Text</label>
-        <textarea id="cvText" rows="14" placeholder="Paste the full CV text here..."></textarea>
-        <button id="analyzeTextBtn">Analyze Text</button>
+        <textarea
+          id="cvText"
+          rows="14"
+          placeholder="Paste the full CV text here..."
+        ></textarea>
+        <button id="analyzeTextBtn" type="button">Analyze Text</button>
       </div>
 
       <div id="pdfTab" class="tab-content">
         <label for="cvFile">Upload PDF</label>
         <input type="file" id="cvFile" accept=".pdf" />
-        <button id="analyzePdfBtn">Analyze PDF</button>
+
+        <div class="button-row">
+          <button id="extractPdfBtn" type="button">Extract CV Text</button>
+          <button id="analyzePdfBtn" type="button">Analyze PDF</button>
+        </div>
+
+        <div id="extractSection" class="hidden">
+          <label for="extractedCvText">Extracted CV Text</label>
+          <textarea
+            id="extractedCvText"
+            rows="10"
+            readonly
+            placeholder="Extracted CV text will appear here..."
+          ></textarea>
+          <button id="copyExtractedTextBtn" type="button">Copy CV Text</button>
+        </div>
       </div>
 
       <div id="status" class="status"></div>
     </section>
 
-    <section class="card">
-      <h2>Job Description Matcher</h2>
-    
-      <label>CV Text</label>
-      <textarea id="matchCv" rows="6"></textarea>
-    
-      <label>Job Description</label>
-      <textarea id="jobDesc" rows="6"></textarea>
-    
-      <button id="matchBtn">Match CV to Job</button>
-    
-      <div id="matchResult"></div>
-    </section>
-
     <section id="resultSection" class="card hidden">
       <div class="result-header">
         <h2>Analysis Result</h2>
-        <button id="copyBtn">Copy Result</button>
+        <button id="copyBtn" type="button">Copy Result</button>
       </div>
 
       <div class="score-box">
@@ -90,6 +98,31 @@
         <h3>Recommended Roles</h3>
         <ul id="roles"></ul>
       </div>
+    </section>
+
+    <section class="card">
+      <h2>Job Description Matcher</h2>
+      <p class="section-note">
+        Paste the CV text directly, or extract it from an uploaded PDF above and copy it here.
+      </p>
+
+      <label for="matchCv">CV Text</label>
+      <textarea
+        id="matchCv"
+        rows="8"
+        placeholder="Paste the CV text here for job matching..."
+      ></textarea>
+
+      <label for="jobDesc">Job Description</label>
+      <textarea
+        id="jobDesc"
+        rows="8"
+        placeholder="Paste the job description here..."
+      ></textarea>
+
+      <button id="matchBtn" type="button">Match CV to Job</button>
+
+      <div id="matchResult" class="match-result"></div>
     </section>
   </div>
 

@@ -145,3 +145,19 @@ button:hover {
 .result-block ul {
   padding-left: 20px;
 }
+
+.button-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.section-note {
+  margin-bottom: 14px;
+  color: #4b5563;
+}
+
+.match-result {
+  margin-top: 16px;
+}

@@ -11,6 +11,11 @@ const statusBox = document.getElementById("status");
 const resultSection = document.getElementById("resultSection");
 const copyBtn = document.getElementById("copyBtn");
 
+const extractPdfBtn = document.getElementById("extractPdfBtn");
+const extractedCvText = document.getElementById("extractedCvText");
+const extractSection = document.getElementById("extractSection");
+const copyExtractedTextBtn = document.getElementById("copyExtractedTextBtn");
+
 tabButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
     tabButtons.forEach((b) => b.classList.remove("active"));
@@ -177,4 +182,56 @@ matchBtn.addEventListener("click", async () => {
     <p><strong>Missing Skills:</strong> ${data.missing_skills.join(", ")}</p>
     <p><strong>Suggestions:</strong> ${data.improvement_suggestions.join(", ")}</p>
   `;
+});
+
+extractPdfBtn.addEventListener("click", async () => {
+  const file = cvFile.files[0];
+
+  if (!file) {
+    setStatus("Please choose a PDF file first.", true);
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("file", file);
+
+  try {
+    setStatus("Extracting CV text from PDF...");
+
+    const response = await fetch(`${API_BASE}/extract-pdf-text`, {
+      method: "POST",
+      body: formData,
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || !result.success) {
+      setStatus(result.error || "Failed to extract PDF text.", true);
+      return;
+    }
+
+    extractedCvText.value = result.cv_text || "";
+    extractSection.classList.remove("hidden");
+    setStatus("CV text extracted successfully. You can now copy it.");
+  } catch (error) {
+    console.error("Extract PDF text error:", error);
+    setStatus(`Server error: ${error.message}`, true);
+  }
+});
+
+copyExtractedTextBtn.addEventListener("click", async () => {
+  const text = extractedCvText.value.trim();
+
+  if (!text) {
+    setStatus("No extracted CV text to copy.", true);
+    return;
+  }
+
+  try {
+    await navigator.clipboard.writeText(text);
+    setStatus("Extracted CV text copied to clipboard.");
+  } catch (error) {
+    console.error("Copy error:", error);
+    setStatus("Failed to copy CV text.", true);
+  }
 });

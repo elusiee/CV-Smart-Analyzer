@@ -55,3 +55,19 @@ async def analyze_pdf(file: UploadFile = File(...)):
 async def match_job(cv_text: str = Form(...), job_desc: str = Form(...)):
     result = match_cv_to_job(cv_text, job_desc)
     return {"success": True, "data": result}
+
+@app.post("/extract-pdf-text")
+async def extract_pdf_text(file: UploadFile = File(...)):
+    if not file.filename.lower().endswith(".pdf"):
+        return {"success": False, "error": "Only PDF files are allowed."}
+
+    file_bytes = await file.read()
+    extracted_text = extract_text_from_pdf_bytes(file_bytes)
+
+    if not extracted_text.strip():
+        return {"success": False, "error": "Could not extract text from this PDF."}
+
+    return {
+        "success": True,
+        "cv_text": extracted_text
+    }
