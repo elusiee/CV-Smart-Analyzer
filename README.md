@@ -1,6 +1,7 @@
 # CV Smart Analyzer
 
 CV Smart Analyzer is a simple AI-powered web app that helps users review and improve their CVs.
+AI-powered CV analysis tool that helps job seekers improve ATS score and job readiness.
 
 ## Features
 - Paste CV text for instant analysis
