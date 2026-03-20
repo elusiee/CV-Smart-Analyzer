@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CV Smart Analyzer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="hero">
+      <h1>CV Smart Analyzer</h1>
+      <p>Upload your CV or paste its content to get instant AI-powered feedback.</p>
+    </header>
+
+    <section class="card">
+      <h2>Analyze Your CV</h2>
+
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="textTab">Paste Text</button>
+        <button class="tab-btn" data-tab="pdfTab">Upload PDF</button>
+      </div>
+
+      <div id="textTab" class="tab-content active">
+        <label for="cvText">Paste CV Text</label>
+        <textarea id="cvText" rows="14" placeholder="Paste the full CV text here..."></textarea>
+        <button id="analyzeTextBtn">Analyze Text</button>
+      </div>
+
+      <div id="pdfTab" class="tab-content">
+        <label for="cvFile">Upload PDF</label>
+        <input type="file" id="cvFile" accept=".pdf" />
+        <button id="analyzePdfBtn">Analyze PDF</button>
+      </div>
+
+      <div id="status" class="status"></div>
+    </section>
+
+    <section id="resultSection" class="card hidden">
+      <div class="result-header">
+        <h2>Analysis Result</h2>
+        <button id="copyBtn">Copy Result</button>
+      </div>
+
+      <div class="score-box">
+        <span>Estimated ATS Score</span>
+        <strong id="atsScore">--</strong>
+      </div>
+
+      <div class="result-block">
+        <h3>Professional Summary</h3>
+        <p id="summary"></p>
+      </div>
+
+      <div class="result-block">
+        <h3>Strengths</h3>
+        <ul id="strengths"></ul>
+      </div>
+
+      <div class="result-block">
+        <h3>Weaknesses</h3>
+        <ul id="weaknesses"></ul>
+      </div>
+
+      <div class="result-block">
+        <h3>Missing Skills</h3>
+        <ul id="missingSkills"></ul>
+      </div>
+
+      <div class="result-block">
+        <h3>Improvement Suggestions</h3>
+        <ul id="suggestions"></ul>
+      </div>
+
+      <div class="result-block">
+        <h3>Recommended Roles</h3>
+        <ul id="roles"></ul>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
