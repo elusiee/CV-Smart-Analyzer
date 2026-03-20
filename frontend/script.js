@@ -145,3 +145,36 @@ analyzePdfBtn.addEventListener("click", async () => {
     setStatus("Server error. Make sure backend is running.", true);
   }
 });
+
+// Job Match
+const matchBtn = document.getElementById("matchBtn");
+
+matchBtn.addEventListener("click", async () => {
+  const cv = document.getElementById("matchCv").value;
+  const job = document.getElementById("jobDesc").value;
+
+  if (!cv || !job) {
+    alert("Please fill both fields");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("cv_text", cv);
+  formData.append("job_desc", job);
+
+  const res = await fetch(`${API_BASE}/match-job`, {
+    method: "POST",
+    body: formData,
+  });
+
+  const result = await res.json();
+
+  const data = result.data;
+
+  document.getElementById("matchResult").innerHTML = `
+    <h3>Match Score: ${data.match_score}</h3>
+    <p><strong>Matched Skills:</strong> ${data.matched_skills.join(", ")}</p>
+    <p><strong>Missing Skills:</strong> ${data.missing_skills.join(", ")}</p>
+    <p><strong>Suggestions:</strong> ${data.improvement_suggestions.join(", ")}</p>
+  `;
+});

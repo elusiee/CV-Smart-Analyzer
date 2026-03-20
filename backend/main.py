@@ -1,7 +1,7 @@
-from fastapi import FastAPI, UploadFile, File
+from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from ai import analyze_cv_text
+from ai import analyze_cv_text, match_cv_to_job
 from pdf_utils import extract_text_from_pdf_bytes
 
 app = FastAPI(title="CV Smart Analyzer API")
@@ -50,3 +50,8 @@ async def analyze_pdf(file: UploadFile = File(...)):
         "extracted_text_preview": extracted_text[:1000],
         "data": result,
     }
+    
+@app.post("/match-job")
+async def match_job(cv_text: str = Form(...), job_desc: str = Form(...)):
+    result = match_cv_to_job(cv_text, job_desc)
+    return {"success": True, "data": result}

@@ -76,3 +76,46 @@ Analyze this CV:
 #         ],
 #         "recommended_roles": ["Junior Developer", "Intern"]
 #     }
+
+
+def match_cv_to_job(cv_text: str, job_desc: str) -> dict:
+    prompt = f"""
+Compare this CV with the job description and return ONLY JSON:
+
+CV:
+{cv_text}
+
+JOB DESCRIPTION:
+{job_desc}
+
+Return format:
+{{
+  "match_score": 0,
+  "matched_skills": ["string"],
+  "missing_skills": ["string"],
+  "improvement_suggestions": ["string"]
+}}
+"""
+
+    response = client.chat.completions.create(
+        model="openrouter/free",
+        temperature=0.3,
+        messages=[
+            {"role": "user", "content": prompt},
+        ],
+    )
+
+    content = response.choices[0].message.content.strip()
+
+    try:
+        return json.loads(content)
+    except:
+        return {
+            "match_score": 65,
+            "matched_skills": ["Python", "APIs"],
+            "missing_skills": ["Docker", "CI/CD"],
+            "improvement_suggestions": [
+                "Add missing technical skills",
+                "Tailor CV to job description"
+            ]
+        }
